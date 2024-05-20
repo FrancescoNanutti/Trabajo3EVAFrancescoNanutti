@@ -1,38 +1,61 @@
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-
 public class Bolita {
-    private int x = 40;
-    private int y = 40;
+    private int ejeX = 40;
+    private int ejeY = 40;
     private final int ancho = 40;
     private final int alto = 40;
     private final int movimiento = 40;
 
+
+    Laberinto lab = new Laberinto();
     public void dibujarBolita(Graphics graficos) {
-        graficos.setColor(Color.green);//Establece el color de la bolita
-        graficos.fillOval(x, y, ancho, alto);//Coordenadas donde se dibuja el relleno de  la bolita
+        graficos.setColor(Color.BLUE);//Establece el color de la bolita
+        graficos.fillOval(ejeX, ejeY, ancho, alto);//Coordenadas donde se dibuja el relleno de  la bolita
         graficos.setColor(Color.black);//Color del contorno
-        graficos.drawOval(x, y, ancho, alto);//Sirve para dibujar el contorno
+        graficos.drawOval(ejeX, ejeY, ancho, alto);//Sirve para dibujar el contorno
     }
+
 
     public void presionarTecla(KeyEvent accion)
     {
-        if (accion.getKeyCode() == 65)//Letra A-Dirección:Izquierda
+        int [][] posicionLaberinto=lab.obtieneLaberinto();
+        if (accion.getKeyCode() == 37)//Flecha Izquierda-Dirección:Izquierda
         {
-            x=x-movimiento;
+            if (posicionLaberinto[ejeY / lab.escala][(ejeX / lab.escala)-1]!=1)
+            {
+                ejeX = ejeX - movimiento;
+            }
         }
-        if (accion.getKeyCode() == 68)//Letra D-Dirección:Derecha
+        if (accion.getKeyCode() == 39)//Flecha Derecha-Dirección:Derecha
         {
-            x=x+movimiento;
+            if (posicionLaberinto[ejeY / lab.escala][(ejeX / lab.escala)+1]!=1) {
+                ejeX = ejeX + movimiento;
+            }
         }
-        if (accion.getKeyCode() == 87)//Letra W-Dirección:Arriba
+        if (accion.getKeyCode() == 38)//Flecha Arriba-Dirección:Arriba
         {
-            y=y-movimiento;
+            if (posicionLaberinto[(ejeY / lab.escala)-1][ejeX / lab.escala]!=1)
+            {
+                ejeY = ejeY - movimiento;
+            }
         }
-        if (accion.getKeyCode() == 83)//Letra S-Dirección abajo
+        if (accion.getKeyCode() == 40)//Flecha Abajo-Dirección abajo
         {
-            y=y+movimiento;
+            if (posicionLaberinto[(ejeY / lab.escala)+1][ejeX / lab.escala]!=1) {
+                ejeY = ejeY + movimiento;
+            }
         }
+
+        //Para cuando la bolita llegue al final, cambie de nivel y vuelva a su posición de inicio
+        if (ejeX==840 && ejeY==440)
+        {
+            Main.cambiarNivel();
+            ejeX=40;
+            ejeY=40;
+        }
+
     }
 }
