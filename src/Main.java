@@ -1,4 +1,6 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -109,7 +111,7 @@ public class Main extends JPanel
             {
                 long finTiempo = System.nanoTime();
                 long tiempoTranscurrido=(finTiempo-inicioTiempo)/1000000000;
-                JOptionPane.showMessageDialog(null, "¡Felicidades! " + nombrejugador  + " has completado los 3 niveles en " +tiempoTranscurrido+ " segundos");
+                JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! has completado los 3 niveles en " +tiempoTranscurrido+ " segundos");
                 System.exit(0);
             }
         }
