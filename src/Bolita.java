@@ -8,6 +8,7 @@ public class Bolita {
     private final int ancho = 40;
     private final int alto = 40;
     private final int movimiento = 40;
+    public static int movimientos = 0;
 
 
     Laberinto lab = new Laberinto();
@@ -27,12 +28,25 @@ public class Bolita {
             if (posicionLaberinto[ejeY / lab.escala][(ejeX / lab.escala)-1]!=1)
             {
                 ejeX = ejeX - movimiento;
+                movimientos++;
+            }
+            else
+            {
+                ejeX=40;
+                ejeY=40;
             }
         }
         if (accion.getKeyCode() == 39)//Flecha Derecha-Dirección:Derecha
         {
-            if (posicionLaberinto[ejeY / lab.escala][(ejeX / lab.escala)+1]!=1) {
+            if (posicionLaberinto[ejeY / lab.escala][(ejeX / lab.escala)+1]!=1)
+            {
                 ejeX = ejeX + movimiento;
+                movimientos++;
+            }
+            else
+            {
+                ejeX=40;
+                ejeY=40;
             }
         }
         if (accion.getKeyCode() == 38)//Flecha Arriba-Dirección:Arriba
@@ -40,14 +54,28 @@ public class Bolita {
             if (posicionLaberinto[(ejeY / lab.escala)-1][ejeX / lab.escala]!=1)
             {
                 ejeY = ejeY - movimiento;
+                movimientos++;
+            }
+            else
+            {
+                ejeX=40;
+                ejeY=40;
             }
         }
         if (accion.getKeyCode() == 40)//Flecha Abajo-Dirección abajo
         {
-            if (posicionLaberinto[(ejeY / lab.escala)+1][ejeX / lab.escala]!=1) {
+            if (posicionLaberinto[(ejeY / lab.escala)+1][ejeX / lab.escala]!=1)
+            {
                 ejeY = ejeY + movimiento;
+                movimientos++;
+            }
+            else
+            {
+                ejeX=40;
+                ejeY=40;
             }
         }
+
 
         //Para cuando la bolita llegue al final, cambie de nivel y vuelva a su posición de inicio
         if (ejeX==840 && ejeY==440)
@@ -56,6 +84,8 @@ public class Bolita {
             ejeX=40;
             ejeY=40;
         }
+
+
 
     }
 }

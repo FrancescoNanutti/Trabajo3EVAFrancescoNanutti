@@ -1,9 +1,13 @@
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 
@@ -17,10 +21,12 @@ import java.util.Scanner;
 
 public class Main extends JPanel
 {
-
     Laberinto laberinto = new Laberinto();
     Bolita bolita= new Bolita();
     public static int contarNivel=1;
+    static double tiempoJuego;
+    static DecimalFormat df = new DecimalFormat("#0.0");
+
 
 
     public Main()
@@ -55,12 +61,28 @@ public class Main extends JPanel
 
 
 
-
     public void paint(Graphics graficos)//"paint" es un metodo de la biblioteca de graphics
     {
         laberinto.dibujarLaberinto(graficos);
         bolita.dibujarBolita(graficos);
+        dibujarEstadisticas((Graphics2D) graficos);
+
     }
+
+
+
+    public static void dibujarEstadisticas(Graphics2D graficos)
+    {
+        Font movimientos=new Font("Arial",Font.BOLD,20);
+        graficos.setFont(movimientos);
+        graficos.setColor(Color.black);
+        graficos.drawString("Movimientos: " +Bolita.movimientos,40,25);
+        Font tiempo=new Font("Arial",Font.BOLD,20);
+        tiempoJuego += (double) 1/60;
+        graficos.drawString("Tiempo: " + df.format(tiempoJuego), 325,25);
+    }
+
+
 
     //Metodo para cambiar el nivel, y suma la variable contarNivel
     public static int cambiarNivel()
@@ -76,12 +98,8 @@ public class Main extends JPanel
 
     public static void main(String[] args)
     {
-
-
         Scanner teclado = new Scanner(System.in);
         String nombrejugador;
-        System.nanoTime();
-        long inicioTiempo=System.nanoTime();
         JOptionPane.showMessageDialog(null, "Bienvenido al laberinto, usa las flechas direccionales para moverte");
         JOptionPane.showMessageDialog(null, "¿Podras completar los 3 niveles?");
         nombrejugador= JOptionPane.showInputDialog("Introduce tu nombre");
@@ -93,11 +111,10 @@ public class Main extends JPanel
         ventana.setLocation(250,100);//Localizar la ventana en la pantlla
         ventana.setVisible(true);//Mostrar la ventana en la pantalla
         ventana.setResizable(false);
-
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Sirve para que cuando se cierre la ventana, se termine de ejecutar
 
 
-        while (true)
+        while (true)//Este bucle sirve para que mientras el juego está en proceso, haya un descanzo de hilos de 10 milisegundos, provocando así el movimiento de la bolita.
         {
             try {
                 Thread.sleep(10);
@@ -109,9 +126,7 @@ public class Main extends JPanel
 
             if (obtenerNivel()>3)
             {
-                long finTiempo = System.nanoTime();
-                long tiempoTranscurrido=(finTiempo-inicioTiempo)/1000000000;
-                JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! has completado los 3 niveles en " +tiempoTranscurrido+ " segundos");
+                JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! has completado los 3 niveles en " +df.format(tiempoJuego)+ " segundos, y has hecho " +Bolita.movimientos+ " movimientos");
                 System.exit(0);
             }
         }

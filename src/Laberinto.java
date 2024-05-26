@@ -114,8 +114,6 @@ public class Laberinto
                     graficos.setColor(Color.black);//Color del contorno del bloque
                     graficos.drawRect(columna*escala,fila*escala,anchoLaberinto,altoLaberinto);
                 }
-
-
         }
     }
 }
