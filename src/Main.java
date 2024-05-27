@@ -34,8 +34,7 @@ public class Main extends JPanel
 
 
 //Constructor que sirve para que cualquier objeto de Main utilize el evento del teclado
-    public Main()
-    {
+    public Main() {
         addKeyListener(new KeyListener() {
             //Metodo KeyTyped no se usa
             @Override
@@ -136,7 +135,7 @@ public class Main extends JPanel
                 JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! Has completado los 3 niveles en " +df.format(tiempoJuego)+ " segundos, y has hecho " +Bolita.movimientos+ " movimientos");
                 LocalTime tiempo = LocalTime.now();
                 LocalDate fecha = LocalDate.now();
-                try (FileWriter fileWriter = new FileWriter("Estadisticas.txt",true))
+                try (FileWriter fileWriter = new FileWriter("./CarpetaEstadisticas/Estadisticas.txt",true))
                 {
                     PrintWriter printWriter = new PrintWriter(fileWriter);
                     printWriter.println("Nombre: " +nombrejugador+ " || Movimientos: " +Bolita.movimientos+ " || TiempoTotal: " +df.format(tiempoJuego)+ " segundos || Dia: " +fecha+ " || Hora: " + tiempo.getHour()+":"+tiempo.getMinute()+":"+tiempo.getSecond());
