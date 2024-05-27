@@ -12,11 +12,28 @@ public class Bolita {
 
 
     Laberinto lab = new Laberinto();
-    public void dibujarBolita(Graphics graficos) {
+    public void dibujarBolita(Graphics graficos)
+    {
         graficos.setColor(Color.BLUE);//Establece el color de la bolita
         graficos.fillOval(ejeX, ejeY, ancho, alto);//Coordenadas donde se dibuja el relleno de  la bolita
         graficos.setColor(Color.black);//Color del contorno
         graficos.drawOval(ejeX, ejeY, ancho, alto);//Sirve para dibujar el contorno
+
+        if (Main.obtenerNivel()==2)
+        {
+            graficos.setColor(Color.RED);//Establece el color de la bolita
+            graficos.fillOval(ejeX, ejeY, ancho, alto);//Coordenadas donde se dibuja el relleno de  la bolita
+            graficos.setColor(Color.black);//Color del contorno
+            graficos.drawOval(ejeX, ejeY, ancho, alto);//Sirve para dibujar el contorno
+        }
+
+        if (Main.obtenerNivel()==3)
+        {
+            graficos.setColor(Color.CYAN);//Establece el color de la bolita
+            graficos.fillOval(ejeX, ejeY, ancho, alto);//Coordenadas donde se dibuja el relleno de  la bolita
+            graficos.setColor(Color.black);//Color del contorno
+            graficos.drawOval(ejeX, ejeY, ancho, alto);//Sirve para dibujar el contorno
+        }
     }
 
 
@@ -34,6 +51,7 @@ public class Bolita {
             {
                 ejeX=40;
                 ejeY=40;
+                movimientos++;
             }
         }
         if (accion.getKeyCode() == 39)//Flecha Derecha-Dirección:Derecha
@@ -47,6 +65,7 @@ public class Bolita {
             {
                 ejeX=40;
                 ejeY=40;
+                movimientos++;
             }
         }
         if (accion.getKeyCode() == 38)//Flecha Arriba-Dirección:Arriba
@@ -60,6 +79,7 @@ public class Bolita {
             {
                 ejeX=40;
                 ejeY=40;
+                movimientos++;
             }
         }
         if (accion.getKeyCode() == 40)//Flecha Abajo-Dirección abajo
@@ -73,6 +93,7 @@ public class Bolita {
             {
                 ejeX=40;
                 ejeY=40;
+                movimientos++;
             }
         }
 

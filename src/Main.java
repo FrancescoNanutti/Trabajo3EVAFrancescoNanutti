@@ -7,7 +7,12 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 
@@ -25,10 +30,10 @@ public class Main extends JPanel
     Bolita bolita= new Bolita();
     public static int contarNivel=1;
     static double tiempoJuego;
-    static DecimalFormat df = new DecimalFormat("#0.0");
+    static DecimalFormat df = new DecimalFormat("#0.0");//Sirve para tener un patron en decimal
 
 
-
+//Constructor que sirve para que cualquier objeto de Main utilize el evento del teclado
     public Main()
     {
         addKeyListener(new KeyListener() {
@@ -78,6 +83,8 @@ public class Main extends JPanel
         graficos.setColor(Color.black);
         graficos.drawString("Movimientos: " +Bolita.movimientos,40,25);
         Font tiempo=new Font("Arial",Font.BOLD,20);
+        graficos.setFont(tiempo);
+        graficos.setColor(Color.black);
         tiempoJuego += (double) 1/60;
         graficos.drawString("Tiempo: " + df.format(tiempoJuego), 325,25);
     }
@@ -126,7 +133,18 @@ public class Main extends JPanel
 
             if (obtenerNivel()>3)
             {
-                JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! has completado los 3 niveles en " +df.format(tiempoJuego)+ " segundos, y has hecho " +Bolita.movimientos+ " movimientos");
+                JOptionPane.showMessageDialog(null, "¡Felicidades " + nombrejugador  + "! Has completado los 3 niveles en " +df.format(tiempoJuego)+ " segundos, y has hecho " +Bolita.movimientos+ " movimientos");
+                LocalTime tiempo = LocalTime.now();
+                LocalDate fecha = LocalDate.now();
+                try (FileWriter fileWriter = new FileWriter("Estadisticas.txt",true))
+                {
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+                    printWriter.println("Nombre: " +nombrejugador+ " || Movimientos: " +Bolita.movimientos+ " || TiempoTotal: " +df.format(tiempoJuego)+ " segundos || Dia: " +fecha+ " || Hora: " + tiempo.getHour()+":"+tiempo.getMinute()+":"+tiempo.getSecond());
+                }
+                catch (IOException e)
+                {
+                    throw new RuntimeException(e);
+                }
                 System.exit(0);
             }
         }
