@@ -29,4 +29,11 @@ El juego muestra las siguientes estadísticas en la parte superior de la ventana
 Cuando completes los tres niveles, el juego mostrará un mensaje de felicitación con tu nombre, tiempo total y el número de movimientos realizados. Luego, el juego se cerrará automáticamente.
 
 
+##Notas
+En ciertas partes del juego me ha sido dificil añadir algunas cosas. Por ejemplo: el drawString que te muestra el tiempo o la logica que hay detras del movimiento de la bolita.
+Otro problema que tuve fue el trabajar desde clase debido a que no podia clonar el repositorio en el equipo de sobremesa.
+
+Tambien aprendi el uso de distintas librerias que ofrece java, por ejemplo las **swing** para controlar ventanas y su contenido, y también las **awt** que ofrecen al usuario trabajar con entorno grafico y tambien las **awt.event** para trabajar con los metodos KeyListener y KeyEvent, que nos permiten usar el teclado para acciones, en este caso el movimiento de la bolita.
+
+
 
