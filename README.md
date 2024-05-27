@@ -29,7 +29,7 @@ El juego muestra las siguientes estadísticas en la parte superior de la ventana
 Cuando completes los tres niveles, el juego mostrará un mensaje de felicitación con tu nombre, tiempo total y el número de movimientos realizados. Luego, el juego se cerrará automáticamente.
 
 
-##Notas
+## Notas
 En ciertas partes del juego me ha sido dificil añadir algunas cosas. Por ejemplo: el drawString que te muestra el tiempo o la logica que hay detras del movimiento de la bolita.
 Otro problema que tuve fue el trabajar desde clase debido a que no podia clonar el repositorio en el equipo de sobremesa.
 
